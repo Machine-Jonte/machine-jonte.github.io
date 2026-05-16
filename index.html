@@ -11,10 +11,87 @@
 	<link rel="icon" type="image/gif" href="images/ic_launcher.png" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
+	<style>
+		/* Banner role badges */
+		.role-badges { display: flex; flex-direction: row; gap: 1.5em; flex-wrap: wrap; }
+		.role-badge-group { display: flex; flex-direction: column; gap: 0.35em; }
+		.role-badge-label { font-size: 0.6em; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(255,255,255,0.35); font-weight: 600; padding-left: 0.25em; }
+		.role-badge {
+			display: flex; align-items: center; gap: 0.75em;
+			background: rgba(255,255,255,0.05);
+			border: 1px solid rgba(255,255,255,0.12) !important;
+			border-radius: 6px; padding: 0.6em 1em;
+			color: white !important; text-decoration: none;
+			transition: background 0.2s ease, border-color 0.2s ease;
+		}
+		.role-badge:hover { background: rgba(230,57,70,0.1) !important; border-color: rgba(230,57,70,0.5) !important; color: white !important; }
+		.role-badge img { height: 2em; width: auto; object-fit: contain; flex-shrink: 0; }
+		.role-badge > div { display: flex; flex-direction: column; gap: 0.1em; }
+		.role-badge strong { font-size: 0.72em; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin: 0; }
+		.role-badge span { font-size: 0.62em; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.12em; display: block; }
+
+		/* YouTube thumbnail play button */
+		.yt-thumb { position: relative; }
+		.yt-thumb::after {
+			content: '▶'; position: absolute; top: 50%; left: 50%;
+			transform: translate(-50%, -50%);
+			background: rgba(230,57,70,0.9); color: white;
+			width: 2.8em; height: 2.8em; border-radius: 50%;
+			line-height: 2.8em; text-align: center; font-size: 1em;
+			pointer-events: none; transition: background 0.2s ease;
+		}
+		article:hover .yt-thumb::after { background: #e63946; }
+
+		/* Soft fade at bottom of banner */
+		#banner::before {
+			content: '';
+			position: absolute;
+			bottom: 0; left: 0; right: 0;
+			height: 10em;
+			background: linear-gradient(to bottom, transparent, #111111);
+			z-index: 2;
+			pointer-events: none;
+		}
+
+		/* Spacing between banner and cards */
+		#main { padding-top: 3em; }
+
+		/* Timeline */
+		.timeline { position: relative; padding-left: 2em; margin-top: 2em; }
+		.timeline::before {
+			content: ''; position: absolute; left: 0; top: 0.5em; bottom: 0;
+			width: 2px; background: rgba(255,255,255,0.1);
+		}
+		.timeline-item { position: relative; padding-left: 1.75em; padding-bottom: 2.25em; }
+		.timeline-item:last-child { padding-bottom: 0; }
+		.timeline-item::before {
+			content: ''; position: absolute; left: -0.45em; top: 0.35em;
+			width: 0.9em; height: 0.9em; border-radius: 50%;
+			background: #e63946; border: 2px solid #111111; box-shadow: 0 0 0 1px #e63946;
+		}
+		.timeline-date { font-size: 0.68em; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.35); margin-bottom: 0.5em; font-weight: 600; }
+		.timeline-header { display: flex; align-items: flex-start; gap: 0.75em; margin-bottom: 0.4em; }
+		.timeline-icon {
+			width: 4em; height: 4em; border-radius: 5px; flex-shrink: 0;
+			display: flex; align-items: center; justify-content: center;
+			font-size: 0.65em; font-weight: 700; letter-spacing: 0; overflow: hidden;
+		}
+		.timeline-icon img { width: 100%; height: 100%; object-fit: contain; padding: 0.25em; }
+		.timeline-title h4 { font-size: 0.95em; font-weight: 600; color: white; margin: 0 0 0.2em 0; line-height: 1.3; }
+		.timeline-org { font-size: 0.7em; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+		.timeline-item > p { font-size: 0.85em; color: rgba(255,255,255,0.55); margin: 0.6em 0 0 0; line-height: 1.65; }
+		.awards-list { display: flex; flex-direction: column; gap: 1.25em; margin-top: 1.5em; }
+		.award-item { display: flex; align-items: center; gap: 1.25em; }
+		.award-icon { font-size: 1.5em; flex-shrink: 0; }
+		.award-body h4 { font-size: 0.95em; font-weight: 600; color: white; margin: 0 0 0.2em 0; }
+		.award-meta { font-size: 0.7em; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+	</style>
 </head>
 
 <body class="is-preload">
@@ -61,8 +138,28 @@
 					<h1>Jonathan Österberg</h1>
 				</header>
 				<div class="content">
-					<p>MCs in System, Control and Robotics (Computer Science) @ KTH Royal Institute of Technology</p>
-					<p>Embedded Software Developer @ Hefring</p>
+					<div class="role-badges">
+						<div class="role-badge-group">
+							<span class="role-badge-label">Education</span>
+							<a class="role-badge" href="https://www.kth.se/en/studies/master/systems-control-robotics/msc-systems-control-and-robotics-1.8733" target="_blank" rel="noopener noreferrer">
+								<img src="images/kth-logo.svg" alt="KTH" />
+								<div>
+									<strong>MSc System, Control &amp; Robotics</strong>
+									<span>KTH Royal Institute of Technology</span>
+								</div>
+							</a>
+						</div>
+						<div class="role-badge-group">
+							<span class="role-badge-label">Current Role</span>
+							<a class="role-badge" href="https://www.hefringmarine.com" target="_blank" rel="noopener noreferrer">
+								<img src="images/hefring-logo.svg" alt="Hefring Marine" />
+								<div>
+									<strong>Embedded Software Developer</strong>
+									<span>Hefring Marine · NATO DIANA 2026</span>
+								</div>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -73,65 +170,55 @@
 			<!-- One -->
 			<section id="one" class="tiles">
 				<article>
-					<span class="image">
-						<img src="https://botbeats.net/images/logo.png" alt="" />
+					<span class="image yt-thumb">
+						<img src="https://img.youtube.com/vi/TeEL0qKNs78/hqdefault.jpg" alt="Bot Beats gameplay" loading="lazy" />
 					</span>
 					<header class="major">
-						<h3><a href="https://botbeats.net/" class="link">Bot Beats</a></h3>
-						<p>Immerse yourself in an epic virtual robot multiplayer programming battle!</p>
+						<h3><a href="https://www.youtube.com/watch?v=TeEL0qKNs78" class="link" target="_blank" rel="noopener noreferrer">Bot Beats</a></h3>
+						<p>Educational programming &amp; robotics game</p>
 					</header>
 				</article>
 				<article>
 					<span class="image">
-						<img src="https://brotir.com/images/logo.png" alt="" />
-					</span>
-					<header class="major">
-						<h3><a href="https://brotir.net/" class="link">Brotir AB</a></h3>
-						<p>Me and my brother's little game studio.</p>
-					</header>
-				</article>
-				<article>
-					<span class="image">
-						<img src="" alt="" />
+						<img src="images/article-helix-unity.gif" alt="Helix editor with Unity C#" loading="lazy" />
 					</span>
 					<header class="major">
 						<h3><a href="https://blog.devgenius.io/helix-and-unity-c-0555a2bef63c"
-								class="link">Tutorial for how to use Helix with C# (Unity)</a></h3>
+								class="link" target="_blank" rel="noopener noreferrer">Tutorial for how to use Helix with C# (Unity)</a></h3>
 						<p>Technical Writing (Medium)</p>
 					</header>
 				</article>
 				<article>
 					<span class="image">
-						<img src="" alt="" />
+						<img src="images/article-python-rust.png" alt="Python and Rust" loading="lazy" />
 					</span>
 					<header class="major">
 						<h3><a href="https://itnext.io/how-to-bind-python-numpy-with-rust-ndarray-2efa5717ed21"
-								class="link">How to bind (Python + NumPy) with (Rust + Ndarray)</a></h3>
+								class="link" target="_blank" rel="noopener noreferrer">How to bind (Python + NumPy) with (Rust + Ndarray)</a></h3>
 						<p>Technical Writing (Medium)</p>
 					</header>
 				</article>
 				<article>
 					<span class="image">
-						<img src="" alt="" />
+						<img src="images/article-rust.png" alt="Rust" loading="lazy" />
 					</span>
 					<header class="major">
-						<h3><a href="https://blog.devgenius.io/rust-and-opencv-bb0467bf35ff" class="link">Rust and
-								OpenCV</a></h3>
+						<h3><a href="https://blog.devgenius.io/rust-and-opencv-bb0467bf35ff" class="link" target="_blank" rel="noopener noreferrer">Rust and OpenCV</a></h3>
 						<p>Technical Writing (Medium)</p>
 					</header>
 				</article>
 				<article>
 					<span class="image">
-						<img src="images/appicon.png" alt="" />
+						<img src="images/appicon.png" alt="" loading="lazy" />
 					</span>
 					<header class="major">
-						<h3><a href="https://rainup-d1008.web.app/" class="link">RainUp - Vocabulary Manager</a></h3>
+						<h3><a href="https://rainup-d1008.web.app/" class="link" target="_blank" rel="noopener noreferrer">RainUp - Vocabulary Manager</a></h3>
 						<p>Play Store and AppStore</p>
 					</header>
 				</article>
 				<article>
 					<span class="image">
-						<img src="./images/demo.gif" alt="" />
+						<img src="./images/demo.gif" alt="" loading="lazy" />
 					</span>
 					<header class="major">
 						<!-- <h3><a href="https://github.com/Machine-Jonte/moveit_vive" class="link">moveit_vive</a></h3> -->
@@ -150,10 +237,10 @@
 				</article> -->
 				<article>
 					<span class="image">
-						<img src="./images/pose_game.gif" alt="" />
+						<img src="./images/pose_game.gif" alt="" loading="lazy" />
 					</span>
 					<header class="major">
-						<h3><a href="https://github.com/Machine-Jonte/pose_game" class="link">pose game</a></h3>
+						<h3><a href="https://github.com/Machine-Jonte/pose_game" class="link" target="_blank" rel="noopener noreferrer">pose game</a></h3>
 						<p>Experimenting on moveit_vive</p>
 					</header>
 				</article>
@@ -169,7 +256,7 @@
 				</article> -->
 				<article>
 					<span class="image">
-						<img src="/images/robot_arm.jpg" alt="" />
+						<img src="/images/robot_arm.jpg" alt="" loading="lazy" />
 					</span>
 					<header class="major">
 						<h3><a href="/robot_arm.html" class="link">robot arm</a></h3>
@@ -178,6 +265,143 @@
 				</article>
 			</section>
 		</div>
+
+		<section>
+			<div class="inner">
+				<header class="major">
+					<h2>Current Work</h2>
+				</header>
+				<p>
+					I'm currently leading the development of Hefring Marine's project selected for the
+					<a target="_blank" rel="noopener noreferrer" href="https://www.diana.nato.int/"><strong>NATO DIANA 2026 programme</strong></a>
+					— one of only 15 companies chosen in the maritime domain from over 3,600 applicants worldwide.
+					DIANA (Defence Innovation Accelerator for the North Atlantic) supports cutting-edge dual-use
+					technology development across the Alliance.
+				</p>
+				<p>
+					My work spans two areas: building machine learning pipelines for
+					<strong>radar-based object detection and classification</strong>, and integrating radar hardware
+					into Hefring's embedded software stack. The goal is to equip maritime vessels with real-time
+					situational awareness for defence, search and rescue, and civil security operations.
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<div class="inner">
+				<header class="major">
+					<h2>Experience</h2>
+				</header>
+				<div class="timeline">
+
+					<div class="timeline-item">
+						<div class="timeline-date">Aug 2024 – Present</div>
+						<div class="timeline-header">
+							<div class="timeline-icon" style="background:#0d2137;">
+								<img src="images/hefring-logo.svg" alt="Hefring Marine" />
+							</div>
+							<div class="timeline-title">
+								<h4>Embedded Software Developer</h4>
+								<span class="timeline-org">Hefring Marine · Iceland</span>
+							</div>
+						</div>
+						<p>Leading development of Hefring's NATO DIANA 2026 project, selected from over 3,600 applicants in the maritime domain. Building ML pipelines for radar-based object detection and classification, and integrating radar hardware into the embedded software stack.</p>
+					</div>
+
+<div class="timeline-item">
+						<div class="timeline-date">Sep 2023 – Aug 2024</div>
+						<div class="timeline-header">
+							<div class="timeline-icon" style="background:#ffffff;">
+								<img src="images/travelshift-logo.png" alt="Travelshift" /></div>
+							<div class="timeline-title">
+								<h4>Senior Python Developer</h4>
+								<span class="timeline-org">Travelshift · Iceland</span>
+							</div>
+						</div>
+						<p>Travelshift powers travel booking platforms across Europe, including Guide to Iceland and Guide to Europe. Worked on the AI team's automatic trip generation algorithm, building systems that compose personalised multi-day itineraries across European destinations at scale.</p>
+					</div>
+
+					<div class="timeline-item">
+						<div class="timeline-date">Nov 2022 – Dec 2023</div>
+						<div class="timeline-header">
+							<div class="timeline-icon" style="background:#0a1a30;">
+								<img src="images/atta-logo.png" alt="ATTA Technologies" />
+							</div>
+							<div class="timeline-title">
+								<h4>Senior AI Software Engineer</h4>
+								<span class="timeline-org">ATTA Technologies · Hong Kong</span>
+							</div>
+						</div>
+						<p>ATTA Technologies is a motion-capture platform that translates human body movement into actionable data for sports analytics and interactive applications. Developed the skeleton pose estimation and body movement detection models powering gesture-based gameplay, similar in concept to Kinect. Also wrote low-level hardware drivers for peripheral components interfacing with the platform.</p>
+					</div>
+
+					<div class="timeline-item">
+						<div class="timeline-date">Nov 2020 – Nov 2022</div>
+						<div class="timeline-header">
+							<div class="timeline-icon" style="background:#1a0000;">
+								<img src="images/raspect-logo.png" alt="RaSpect" />
+							</div>
+							<div class="timeline-title">
+								<h4>AI Software Engineer</h4>
+								<span class="timeline-org">RaSpect Intelligence Inspection · Hong Kong</span>
+							</div>
+						</div>
+						<p>RaSpect uses AI-powered computer vision to automate safety inspections of buildings and built infrastructure. Built the core detection engine, an ensemble of multiple vision models working together, along with an image and video stitching pipeline for long continuous recordings of building facades, including challenging cases involving reflective surfaces and visually repetitive materials.</p>
+					</div>
+
+					<div class="timeline-item edu">
+						<div class="timeline-date">2018 – 2020</div>
+						<div class="timeline-header">
+							<div class="timeline-icon" style="background:#1c3f6e;">
+								<img src="images/kth-logo.svg" alt="KTH" />
+							</div>
+							<div class="timeline-title">
+								<h4>MSc, System Control &amp; Robotics</h4>
+								<span class="timeline-org">KTH Royal Institute of Technology</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="timeline-item edu">
+						<div class="timeline-date">2014 – 2018</div>
+						<div class="timeline-header">
+							<div class="timeline-icon" style="background:#1c3f6e;">
+								<img src="images/kth-logo.svg" alt="KTH" />
+							</div>
+							<div class="timeline-title">
+								<h4>BSc, Computer Science</h4>
+								<span class="timeline-org">KTH Royal Institute of Technology</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="inner">
+				<header class="major">
+					<h2>Awards &amp; Grants</h2>
+				</header>
+				<div class="awards-list">
+					<div class="award-item">
+						<div class="award-icon">🏆</div>
+						<div class="award-body">
+							<h4>Best Solution, Datathon</h4>
+							<span class="award-meta">Gagnavist Conference &middot; 2025</span>
+						</div>
+					</div>
+					<div class="award-item">
+						<div class="award-icon">🎓</div>
+						<div class="award-body">
+							<h4>Rannís Research Grant</h4>
+							<span class="award-meta">Balanced Basket &middot; Ongoing</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<section>
 			<div class="inner">
@@ -242,8 +466,7 @@
 		<!-- Footer -->
 		<footer id="footer">
 			<div class="inner">
-				<div class="copyright">&copy; Jonathan Edwin Oesterberg. All rights reserved. Design: <a
-						href="https://html5up.net">HTML5 UP</a>.</div>
+				<div class="copyright">&copy; Jonathan Edwin Oesterberg. All rights reserved.</div>
 			</div>
 		</footer>
 

@@ -5,7 +5,7 @@
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
 @import 'fontawesome-all.min.css';
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
 /*
 	Forty by HTML5 UP
@@ -31,11 +31,11 @@
 			@include padding(4em, 0);
 			margin: 0 auto;
 			max-width: _size(inner);
-			width: calc(100% - 6em);
+			width: calc(100% - 10em);
 
 			@include breakpoint('<=small') {
 				@include padding(3em, 0);
-				width: calc(100% - 3em);
+				width: calc(100% - 4em);
 			}
 		}
 	}
