@@ -86,11 +86,35 @@
 		.timeline-title h4 { font-size: 0.95em; font-weight: 600; color: white; margin: 0 0 0.2em 0; line-height: 1.3; }
 		.timeline-org { font-size: 0.7em; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
 		.timeline-item > p { font-size: 0.85em; color: rgba(255,255,255,0.55); margin: 0.6em 0 0 0; line-height: 1.65; }
+		/* Multiple roles at one company: indented to line up with the company name
+		   (icon is 4em at font-size 0.65em = 2.6em, plus the 0.75em header gap). */
+		.timeline-roles { position: relative; margin: 0.9em 0 0 3.35em; padding-left: 1.15em; }
+		.timeline-roles::before {
+			content: ''; position: absolute; left: 0; top: 0.5em; bottom: 0.5em;
+			width: 1px; background: rgba(255,255,255,0.12);
+		}
+		.timeline-role { position: relative; padding-bottom: 1.5em; }
+		.timeline-role:last-child { padding-bottom: 0; }
+		.timeline-role::before {
+			content: ''; position: absolute; left: -1.4em; top: 0.45em;
+			width: 0.5em; height: 0.5em; border-radius: 50%; background: rgba(255,255,255,0.3);
+		}
+		.timeline-role h5 { font-size: 0.9em; font-weight: 600; color: white; margin: 0; line-height: 1.4; }
+		.timeline-role-date { display: block; font-size: 0.65em; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.35); font-weight: 600; margin-top: 0.3em; }
+		.timeline-role p { font-size: 0.85em; color: rgba(255,255,255,0.55); margin: 0.55em 0 0 0; line-height: 1.65; }
 		.awards-list { display: flex; flex-direction: column; gap: 1.25em; margin-top: 1.5em; }
-		.award-item { display: flex; align-items: center; gap: 1.25em; }
-		.award-icon { font-size: 1.5em; flex-shrink: 0; }
+		.award-item { display: flex; align-items: flex-start; gap: 1.25em; }
+		.award-icon, .award-logo {
+			flex-shrink: 0; border-radius: 5px; overflow: hidden;
+			display: flex; align-items: center; justify-content: center;
+		}
+		/* Both icon boxes resolve to 2.4em of the list's font size, so titles line up. */
+		.award-icon { width: 1.6em; height: 1.6em; font-size: 1.5em; }
+		.award-logo { width: 2.4em; height: 2.4em; background: #ffffff; }
+		.award-logo img { width: 100%; height: 100%; object-fit: contain; padding: 0.15em; }
 		.award-body h4 { font-size: 0.95em; font-weight: 600; color: white; margin: 0 0 0.2em 0; }
 		.award-meta { font-size: 0.7em; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+		.award-body p { font-size: 0.8em; color: rgba(255,255,255,0.5); margin: 0.4em 0 0 0; line-height: 1.6; }
 	</style>
 </head>
 
@@ -301,14 +325,25 @@
 								<img src="images/hefring-logo.svg" alt="Hefring Marine" />
 							</div>
 							<div class="timeline-title">
-								<h4>Senior AI Engineer</h4>
-								<span class="timeline-org">Hefring Marine · Iceland</span>
+								<h4>Hefring Marine</h4>
+								<span class="timeline-org">Iceland · Full-time</span>
 							</div>
 						</div>
-						<p>Leading development of Hefring's NATO DIANA 2026 project, selected from over 3,600 applicants in the maritime domain. Building ML pipelines for radar-based object detection and classification, and integrating radar hardware into the embedded software stack.</p>
+						<div class="timeline-roles">
+							<div class="timeline-role">
+								<h5>Senior AI Engineer</h5>
+								<span class="timeline-role-date">Jul 2026 – Present</span>
+								<p>Leading development of Hefring's NATO DIANA 2026 project, selected from over 3,600 applicants in the maritime domain. Building ML pipelines for radar-based object detection and classification, and integrating radar hardware into the embedded software stack.</p>
+							</div>
+							<div class="timeline-role">
+								<h5>Embedded Software Developer</h5>
+								<span class="timeline-role-date">Aug 2024 – Jul 2026</span>
+								<p>Developed and optimised embedded software for Hefring's Intelligent Marine Assistance System (IMAS), enabling reliable real-time processing on edge computers aboard marine vessels. Integrated sensors, navigation equipment, and other onboard hardware into the software stack, and travelled internationally to install systems on customer vessels.</p>
+							</div>
+						</div>
 					</div>
 
-<div class="timeline-item">
+					<div class="timeline-item">
 						<div class="timeline-date">Sep 2023 – Aug 2024</div>
 						<div class="timeline-header">
 							<div class="timeline-icon" style="background:#ffffff;">
@@ -385,6 +420,16 @@
 					<h2>Awards &amp; Grants</h2>
 				</header>
 				<div class="awards-list">
+					<div class="award-item">
+						<div class="award-logo">
+							<img src="images/cirtuic-logo.png" alt="Cirtuic" />
+						</div>
+						<div class="award-body">
+							<h4><a href="https://vb.is/frettir/tiu-teymi-valin-i-startup-supernova/" target="_blank" rel="noopener noreferrer">Startup SuperNova Accelerator</a></h4>
+							<span class="award-meta">Cirtuic &middot; Ongoing, 3 Aug &ndash; 19 Sep 2026</span>
+							<p>One of ten teams selected from a record number of applicants for the six-week accelerator run by KLAK &ndash; Icelandic Startups, Nova and Huawei. Cirtuic is the open, AI-native PCB design platform.</p>
+						</div>
+					</div>
 					<div class="award-item">
 						<div class="award-icon">🏆</div>
 						<div class="award-body">
